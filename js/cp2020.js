@@ -183,29 +183,8 @@ function randSiblingsClick() {
             var siblingAge = getRandomInt(1, 10);
             var siblingFeel = getRandomInt(1, 10);
 
-            var siblingOut = "Sibling " + i.toString() + ": ";
-
-            if (siblingAge <= 5) {
-                siblingOut += siblingAges[1];
-            } else if (siblingAge >= 6 && siblingAge <= 9) {
-                siblingOut += siblingAges[2];
-            } else if (siblingAge === 10) {
-                siblingOut += siblingAges[3];
-            }
-
-            siblingOut += " " + siblingGenders[siblingGender] + " ";
-
-            if (siblingFeel <= 2) {
-                siblingOut += siblingFeelings[1];
-            } else if (siblingFeel >= 3 && siblingFeel <= 4) {
-                siblingOut += siblingFeelings[2];
-            } else if (siblingFeel >= 5 && siblingFeel <= 6) {
-                siblingOut += siblingFeelings[3];
-            } else if (siblingFeel >= 7 && siblingFeel <= 8) {
-                siblingOut += siblingFeelings[4];
-            } else if (siblingFeel >= 9) {
-                siblingOut += siblingFeelings[5];
-            }
+            var siblingOut = "Sibling " + i.toString() + ": " + siblingAges[siblingAge] + " " + siblingGenders[siblingGender] +
+                " " + siblingFeelings[siblingFeel];
 
             siblingsOutput.innerHTML += siblingOut;
             appendBR(siblingsOutput);
@@ -818,27 +797,28 @@ var siblingGenders = {
 
 var siblingAges = {
     1: "older",
-    2: "younger",
-    3: "twin"
+    2: "older",
+    3: "older",
+    4: "older",
+    5: "older",
+    6: "younger",
+    7: "younger",
+    8: "younger",
+    9: "younger",
+    10: "twin"
 };
 
 var siblingFeelings = {
     1: "sibling dislikes you",
-    2: "sibling likes you",
-    3: "sibling neutral towards you",
-    4: "sibling hero worships you",
-    5: "sibling hates you"
-};
-
-var manualSiblingsList = {
-    1: "only child",
-    2: 1,
-    3: 2,
-    4: 3,
-    5: 4,
-    6: 5,
-    7: 6,
-    8: 7
+    2: "sibling dislikes you",
+    3: "sibling likes you",
+    4: "sibling likes you",
+    5: "sibling neutral towards you",
+    6: "sibling neutral towards you",
+    7: "sibling hero worships you",
+    8: "sibling hero worships you",
+    9: "sibling hates you",
+    10: "sibling hates you"
 };
 
 var persTraits = {
