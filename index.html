@@ -1,819 +1,495 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <noscript>
-        <meta http-equiv="refresh" content="0; URL=noJS.html">
-    </noscript>
-    <link rel="stylesheet" href="css/cp2020.css">
-    <script src="js/html2canvas.js"></script>
-    <script src="js/cp2020.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-56531990-1', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<noscript>
+		<meta http-equiv="refresh" content="0; URL=noJS.html">
+	</noscript>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/cp2020.css">
+	<script src="js/html2canvas.js"></script>
+	<script src="js/cp2020.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<!--The character output / results section (on the right)-->
-<div id="fullCharOutput">
-        <div id="charOutputStats">
-            <label for="charNameOutput" id="charNameOutput_label">
-                Handle
-            </label>
-            <span id="charNameOutput">&nbsp;</span>
 
-            <br>
-            <label for="charRoleOutput" id="charRoleOutput_label">
-                Role
-            </label>
-            <span id="charRoleOutput">&nbsp;</span>
+<div class="column">
 
-            <br>
-            <label for="charPointsOutput" id="charPointsOutput_label">
-                Character Points
-            </label>
-            <span id="charPointsOutput">&nbsp;</span>
-            <br>
+	<!-- Generate / Calculate Character -->
+	<section>
+		<h1>Cyberpunk 2020 Character Generator</h1>
+		<p>Enter your character's name (Handle), select a Character Point generation method, choose a Role and click the
+			Generate button.</p>
+		<p>
+			<button id="saveImage">Save Character Sheet as Image</button>
+		</p>
+		<hr>
+		<p><a href="https://github.com/gwelser/cp2020">View source</a> on GitHub | forked from this <a
+				href="https://github.com/ericdorsey/cp2020">original</a>.</p>
+	</section>
 
-            <label for="stats" id="stats_label">
-                <span id="stats">Stats</span>
-            </label>
+	<section>
+		<h1>Generate</h1>
 
-            <br>
-            <label for="charINTOutput" id="charINTOutput_label" class="charStatOutput">
-                INT [<span id="charINTOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charREFOutput" id="charREFOutput_label" class="charStatOutput">
-                REF [<span id="charREFOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charTECHOutput" id="charTECHOutput_label" class="charStatOutput">
-                TECH [<span id="charTECHOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charCOOLOutput" id="charCOOLOutput_label" class="charStatOutput">
-                COOL [<span id="charCOOLOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <br>
-            <label for="charATTROutput" id="charATTROutput_label" class="charStatOutput">
-                ATTR [<span id="charATTROutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charLUCKOutput" id="charLUCKOutput_label" class="charStatOutput">
-                LUCK [<span id="charLUCKOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charMAOutput" id="charMAOutput_label" class="charStatOutput">
-                MA [<span id="charMAOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charBODYOutput" id="charBODYOutput_label" class="charStatOutput">
-                BODY [<span id="charBODYOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <br>
-            <label for="charEMPOutput" id="charEMPOutput_label" class="charStatOutput">
-                EMP [<span id="charEMPOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charHumanityOutput" id="charHumanityOutput_label" class="charStatOutputDervied">
-                Humanity [<span id="charHumanityOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <br>
-            <label for="charRunOutput" id="charRunOutput_label" class="charStatOutputDervied">
-                Run [<span id="charRunOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charLeapOutput" id="charLeapOutput_label" class="charStatOutputDervied">
-                Leap [<span id="charLeapOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <br>
-            <label for="charLiftOutput" id="charLiftOutput_label" class="charStatOutputDervied">
-                Lift (kgs) [<span id="charLiftOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charLiftLBsOutput" id="charLiftLBsOutput_label" class="charStatOutputDervied">
-                Lift  (lbs) [<span id="charLiftLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <br>
-            <label for="charCarryOutput" id="charCarryOutput_label" class="charStatOutputDervied">
-                Carry (kgs) [<span id="charCarryOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
-            <label for="charCarryLBsOutput" id="charCarryLBsOutput_label" class="charStatOutputDervied">
-                Carry (lbs) [<span id="charCarryLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
-            </label>
+		<div class="configure">
 
-        </div>
-        <table class="savebtm">
-            <tr>
-                <td>Save</td>
-            </tr>
-            <tr>
-                <td id="saveCharOutput"></td>
-            </tr>
-        </table>
-        <table class="savebtm">
-            <tr>
-                <td>BTM</td>
-            </tr>
-            <tr>
-                <td id="btmCharOutput"></td>
-            </tr>
-        </table>
-        <br>
-        <label for="skills" id="skills_label">
-            <span id="skills">Skills</span>
-        </label>
-        <br>
-        <div id="skillCharOutput">
-        </div>
-        <div id="pickupSkillCharOutput">
+			<h2>Configure</h2>
 
-    </div>
+			<p><label>Statistic Generation Method: <select id="rollMethod">
+				<option value="random">Random Method</option>
+				<option value="fast">Fast Method</option>
+				<option value="cineMajorHero">Major Hero</option>
+				<option value="cineMajorSupp">Major Supporting Character</option>
+				<option value="cineMinorHero">Minor Hero</option>
+				<option value="cineMinorSupp">Minor Supporting Character</option>
+				<option value="Average">Average</option>
+				<option value="manual">Manually Enter Value</option>
+			</select></label></p>
 
-    <label for="styleCharOutput" id="styleCharOutput_label">
-        <span id="styleCharOutput">Style</span>
-    </label>
-    <div id="charStyleOutput">
-        <label for="clothesCharOutput" id="clothesCharOutput_label">
-            Clothes:
-        </label>
-        <span id="clothesCharOutput">&nbsp;</span>
+			<p><label>Handle: <input type="text" id="handle" size="45" placeholder="Character Name"></label></p>
 
-        <br>
-        <label for="hairCharOutput" id="hairCharOutput_label">
-            Hair:
-        </label>
-        <span id="hairCharOutput">&nbsp;</span>
+			<p><label>Role: <select id="roleSelect"></select></label></p>
 
-        <br>
-        <label for="affecCharOutput" id="affecCharOutput_label">
-            Affectations:
-        </label>
-        <span id="affecCharOutput">&nbsp;</span>
+			<p>
+				<button id="generate">Generate!</button>
+			</p>
 
-        <br>
-        <label for="ethCharOutput" id="ethCharOutput_label">
-            Ethnicity:
-        </label>
-        <span id="ethCharOutput">&nbsp;</span>
+		</div>
 
-        <br>
-        <label for="langCharOutput" id="langCharOutput_label">
-            Language:
-        </label>
-        <span id="langCharOutput">&nbsp;</span>
+		<hr>
+
+		<div class="statistics">
+			<div class="column">
+				<h3>Statistics</h3>
+				<p><span id="rollOutput"></span><br>Stats Points Remaining: <span id="statPointsRemaining"></span></p>
+
+				<table id="statsTable">
+					<tbody>
+					<tr>
+						<th>Intelligence (INT)</th>
+						<td><input type="text" id="int" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Reflexes (REF)</th>
+						<td><input type="text" id="ref" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Technical Ability (TECH)</th>
+						<td><input type="text" id="tech" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Cool (COOL)</th>
+						<td><input type="text" id="cl" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Attractiveness (ATT)</th>
+						<td><input type="text" id="att" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Luck (LUCK)</th>
+						<td><input type="text" id="lk" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Movement Allowance (MA)</th>
+						<td><input type="text" id="ma" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Body Type (BODY)</th>
+						<td><input type="text" id="bt" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					<tr>
+						<th>Empathy (EMP)</th>
+						<td><input type="text" id="emp" class="statValueBoxes" size="2" disabled="true"></td>
+					</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+			<div class="column">
+				<h3>Derived Stats</h3>
+
+				<table>
+					<tr>
+						<td>Run</td>
+						<td><span id="run"></span>m</td>
+					</tr>
+					<tr>
+						<td>Leap</td>
+						<td><span id="leap"></span>m</td>
+					</tr>
+					<tr>
+						<td>Lift</td>
+						<td><span id="lift"></span>kg/ <span id="liftLBs"></span>lb.</td>
+					</tr>
+					<tr>
+						<td>Carry</td>
+						<td><span id="carry"></span>kg/ <span id="carryLBs"></span>lb.</td>
+					</tr>
+					<tr>
+						<td>Body Type</td>
+						<td><span id="bodyType"></span></td>
+					</tr>
+					<tr>
+						<td>Body Type Modifier</td>
+						<td><span id="btm"></span></td>
+					</tr>
+					<tr>
+						<td>Save</td>
+						<td><span id="save"></span></td>
+					</tr>
+					<tr>
+						<td>Humanity</td>
+						<td><span id="humanity"></span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="skills">
+			<h3>Skills</h3>
+
+			<h4>Career Skills</h4>
+
+			<p>Career Skill Points Remaining: <span id="careerSkillPointsRemaining">40</span></p>
+
+			<table id="careerSkillTable">
+
+			</table>
+
+			<h4>Pickup Skills</h4>
+
+			<p>Pickup Skill Points (REF + INT) : <span id="pickupSkillPointField"></span></p>
+
+			<p>Pickup Skill Points Remaining: <span id="pickupSkillPointsRemaining"></span></p>
+
+			<p id="pickupSkillButton"></p>
+
+			<table id="pickupSkillsTable"></table>
+
+		</div>
+
+		<hr>
+
+		<h3>Origins and Personal Style</h3>
+
+		<div class="style">
+			<div class="column">
+				<h4>Dress & Personal Style</h4>
+				<p>
+					<strong>Clothes:</strong> <span id="clothesField"></span><br>
+					<strong>Hairstyle:</strong> <span id="hairField"></span><br>
+					<strong>Affectations:</strong> <span id="affecField"></span>
+				</p>
+			</div>
+
+			<div class="column">
+				<h4>Ethnic Origins</h4>
+				<p>
+					<strong>Ethnicity:</strong> <span id="ethField"></span><br>
+					<strong>Language:</strong> <span id="ethLang"></span>
+				</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<h3>Family Background</h3>
+
+		<h4>Family Ranking</h4>
+		<p id="famRankField"></p>
+
+		<h4>Parents</h4>
+		<p id="parentStatusField"></p>
+		<p id="parentSomethingHappened">
+			<strong>What Happened to Your Parents?</strong> <span id="parentSomethingHappenedField"></span>
+		</p>
+
+		<h4>Family Status</h4>
+		<p id="familyStatus"></p>
+		<p id="famTragedyHeader">
+			<strong>Family Tragedy:</strong> <span id="familyTragedyOutput"></span>
+		</p>
+
+		<h4>Childhood Environment</h4>
+		<p id="childEnvOutput"></p>
+
+		<h4>Siblings</h4>
+		<p id="haveSiblings"></p>
+		<!-- Houses the output of each sibling: gender, age, feelings about -->
+		<p id="siblingsOutput"></p>
+
+		<hr>
+
+		<h3>Motivations</h3>
+
+		<h4>Personality Traits</h4>
+		<p id="persTraitsField"></p>
+
+		<h4>Person You Value Most</h4>
+		<p id="persValField"></p>
+
+		<h4>What Do You Value Most?</h4>
+		<p id="youValField"></p>
+
+		<h4>How Do You Feel About Most People?</h4>
+		<p id="youFeelField"></p>
+
+		<h4>What Is Your Most Valued Possession?</h4>
+		<p id="posField"></p>
+
+		<hr>
+
+		<h3>Life Events</h3>
+		<p>
+			<strong>Age:</strong> <input type="text" id="ageField" size="4">
+		</p>
+		<p>
+			<label><input type="checkbox" id="preventNothing"> Prevent "Nothing Happened This Year" events.</label>
+		</p>
+		<table id="lifeTable">
+			<tr class="boldTableHead">
+				<td>Age</td>
+				<td>Event Type</td>
+				<td>Result</td>
+				<td>Detail</td>
+			</tr>
+		</table>
+
+	</section>
+
+</div>
+
+<div class="column">
+
+	<!--The character output / results section (on the right)-->
+	<section id="fullCharOutput">
+		<div id="charOutputStats">
+			<label for="charNameOutput" id="charNameOutput_label">
+				Handle
+			</label>
+			<span id="charNameOutput">&nbsp;</span>
+
+			<br>
+			<label for="charRoleOutput" id="charRoleOutput_label">
+				Role
+			</label>
+			<span id="charRoleOutput">&nbsp;</span>
+
+			<br>
+			<label for="charPointsOutput" id="charPointsOutput_label">
+				Character Points
+			</label>
+			<span id="charPointsOutput">&nbsp;</span>
+			<br>
+
+			<label for="stats" id="stats_label">
+				<span id="stats">Stats</span>
+			</label>
+
+			<br>
+			<label for="charINTOutput" id="charINTOutput_label" class="charStatOutput">
+				INT [<span id="charINTOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charREFOutput" id="charREFOutput_label" class="charStatOutput">
+				REF [<span id="charREFOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charTECHOutput" id="charTECHOutput_label" class="charStatOutput">
+				TECH [<span id="charTECHOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charCOOLOutput" id="charCOOLOutput_label" class="charStatOutput">
+				COOL [<span id="charCOOLOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<br>
+			<label for="charATTROutput" id="charATTROutput_label" class="charStatOutput">
+				ATTR [<span id="charATTROutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charLUCKOutput" id="charLUCKOutput_label" class="charStatOutput">
+				LUCK [<span id="charLUCKOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charMAOutput" id="charMAOutput_label" class="charStatOutput">
+				MA [<span id="charMAOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charBODYOutput" id="charBODYOutput_label" class="charStatOutput">
+				BODY [<span id="charBODYOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<br>
+			<label for="charEMPOutput" id="charEMPOutput_label" class="charStatOutput">
+				EMP [<span id="charEMPOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charHumanityOutput" id="charHumanityOutput_label" class="charStatOutputDervied">
+				Humanity [<span id="charHumanityOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<br>
+			<label for="charRunOutput" id="charRunOutput_label" class="charStatOutputDervied">
+				Run [<span id="charRunOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charLeapOutput" id="charLeapOutput_label" class="charStatOutputDervied">
+				Leap [<span id="charLeapOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<br>
+			<label for="charLiftOutput" id="charLiftOutput_label" class="charStatOutputDervied">
+				Lift (kgs) [<span id="charLiftOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charLiftLBsOutput" id="charLiftLBsOutput_label" class="charStatOutputDervied">
+				Lift (lbs) [<span id="charLiftLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<br>
+			<label for="charCarryOutput" id="charCarryOutput_label" class="charStatOutputDervied">
+				Carry (kgs) [<span id="charCarryOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+			<label for="charCarryLBsOutput" id="charCarryLBsOutput_label" class="charStatOutputDervied">
+				Carry (lbs) [<span id="charCarryLBsOutput">&nbsp;&nbsp;&nbsp;</span>]
+			</label>
+
+		</div>
+		<table class="savebtm">
+			<tr>
+				<td>Save</td>
+			</tr>
+			<tr>
+				<td id="saveCharOutput"></td>
+			</tr>
+		</table>
+		<table class="savebtm">
+			<tr>
+				<td>BTM</td>
+			</tr>
+			<tr>
+				<td id="btmCharOutput"></td>
+			</tr>
+		</table>
+		<br>
+		<label for="skills" id="skills_label">
+			<span id="skills">Skills</span>
+		</label>
+		<br>
+		<div id="skillCharOutput">
+		</div>
+		<div id="pickupSkillCharOutput">
+
+		</div>
+
+		<label for="styleCharOutput" id="styleCharOutput_label">
+			<span id="styleCharOutput">Style</span>
+		</label>
+		<div id="charStyleOutput">
+			<label for="clothesCharOutput" id="clothesCharOutput_label">
+				Clothes:
+			</label>
+			<span id="clothesCharOutput">&nbsp;</span>
+
+			<br>
+			<label for="hairCharOutput" id="hairCharOutput_label">
+				Hair:
+			</label>
+			<span id="hairCharOutput">&nbsp;</span>
+
+			<br>
+			<label for="affecCharOutput" id="affecCharOutput_label">
+				Affectations:
+			</label>
+			<span id="affecCharOutput">&nbsp;</span>
+
+			<br>
+			<label for="ethCharOutput" id="ethCharOutput_label">
+				Ethnicity:
+			</label>
+			<span id="ethCharOutput">&nbsp;</span>
+
+			<br>
+			<label for="langCharOutput" id="langCharOutput_label">
+				Language:
+			</label>
+			<span id="langCharOutput">&nbsp;</span>
 
 
-    </div>
+		</div>
 
-    <label for="famBackCharOutputTitle" id="famBackCharOutputTitle_label">
-        <span id="famBackCharOutputTitle">Family Background</span>
-    </label>
-    <br>
-    <div id="charFamOutput">
-        <label for="famRankCharOutput" id="famRankCharOutput_label">
-            Family Ranking:
-        </label>
-        <span id="famRankCharOutput">&nbsp;</span>
-        <br>
-        <label for="parentStatusCharOutput" id="parentStatusCharOutput_label">
-            Status of Parents:
-        </label>
-        <span id="parentStatusCharOutput">&nbsp;</span>
-        <br>
-        <label for="familyStatusCharOutput" id="familyStatusCharOutput_label">
-            Family Status:
-        </label>
-        <span id="familyStatusCharOutput">&nbsp;</span>
-        <br>
-        <label for="childEnvCharOutput" id="childEnvCharOutput_label">
-            Childhood Environment:
-        </label>
-        <span id="childEnvCharOutput">&nbsp;</span>
+		<label for="famBackCharOutputTitle" id="famBackCharOutputTitle_label">
+			<span id="famBackCharOutputTitle">Family Background</span>
+		</label>
+		<br>
+		<div id="charFamOutput">
+			<label for="famRankCharOutput" id="famRankCharOutput_label">
+				Family Ranking:
+			</label>
+			<span id="famRankCharOutput">&nbsp;</span>
+			<br>
+			<label for="parentStatusCharOutput" id="parentStatusCharOutput_label">
+				Status of Parents:
+			</label>
+			<span id="parentStatusCharOutput">&nbsp;</span>
+			<br>
+			<label for="familyStatusCharOutput" id="familyStatusCharOutput_label">
+				Family Status:
+			</label>
+			<span id="familyStatusCharOutput">&nbsp;</span>
+			<br>
+			<label for="childEnvCharOutput" id="childEnvCharOutput_label">
+				Childhood Environment:
+			</label>
+			<span id="childEnvCharOutput">&nbsp;</span>
 
-    </div>
+		</div>
 
-    <label for="siblingCharOutputTitle" id="siblingCharOutputTitle_label">
-        <span id="siblingCharOutputTitle">Siblings</span><span id="charSiblingOutputNum">&nbsp;&nbsp;&nbsp;</span>
-    </label>
-    <br>
-    <div id="charSiblingOutput">
+		<label for="siblingCharOutputTitle" id="siblingCharOutputTitle_label">
+			<span id="siblingCharOutputTitle">Siblings</span><span id="charSiblingOutputNum">&nbsp;&nbsp;&nbsp;</span>
+		</label>
+		<br>
+		<div id="charSiblingOutput">
 
-    </div>
-    <div id="charMotivOutput">
-        <label for="motivCharOutput" id="motivCharOutput_label">
-            <span id="motivCharOutput">Motivations</span>
-        </label>
+		</div>
+		<div id="charMotivOutput">
+			<label for="motivCharOutput" id="motivCharOutput_label">
+				<span id="motivCharOutput">Motivations</span>
+			</label>
 
-        <br>
-        <label for="persTraitCharOutput" id="persTraitCharOutput_label">
-            Personality Traits:
-        </label>
-        <span id="persTraitCharOutput">&nbsp;</span>
+			<br>
+			<label for="persTraitCharOutput" id="persTraitCharOutput_label">
+				Personality Traits:
+			</label>
+			<span id="persTraitCharOutput">&nbsp;</span>
 
-        <br>
-        <label for="persValCharOutput" id="persValCharOutput_label">
-            Valued Person:
-        </label>
-        <span id="persValCharOutput">&nbsp;</span>
+			<br>
+			<label for="persValCharOutput" id="persValCharOutput_label">
+				Valued Person:
+			</label>
+			<span id="persValCharOutput">&nbsp;</span>
 
-        <br>
-        <label for="valMostCharOutput" id="valMostCharOutput_label">
-            Value Most:
-        </label>
-        <span id="valMostCharOutput">&nbsp;</span>
+			<br>
+			<label for="valMostCharOutput" id="valMostCharOutput_label">
+				Value Most:
+			</label>
+			<span id="valMostCharOutput">&nbsp;</span>
 
-        <br>
-        <label for="feelPeopleCharOutput" id="feelPeopleCharOutput_label">
-            Feel About People:
-        </label>
-        <span id="feelPeopleCharOutput">&nbsp;</span>
+			<br>
+			<label for="feelPeopleCharOutput" id="feelPeopleCharOutput_label">
+				Feel About People:
+			</label>
+			<span id="feelPeopleCharOutput">&nbsp;</span>
 
-        <br>
-        <label for="valPosessionCharOutput" id="valPosessionCharOutput_label">
-            Valued Posession:
-        </label>
-        <span id="valPosessionCharOutput">&nbsp;</span>
-    </div>
+			<br>
+			<label for="valPosessionCharOutput" id="valPosessionCharOutput_label">
+				Valued Posession:
+			</label>
+			<span id="valPosessionCharOutput">&nbsp;</span>
+		</div>
 
-    <label for="charLifeEventsTitle" id="charLifeEventsTitle_label">
-        <span id="charLifeEventsTitle">Life Events</span>
-    </label>
-    <br>
-    <div id="charLifeEvents">
+		<label for="charLifeEventsTitle" id="charLifeEventsTitle_label">
+			<span id="charLifeEventsTitle">Life Events</span>
+		</label>
+		<br>
+		<div id="charLifeEvents">
 
-    </div>
+		</div>
+
+	</section>
 
 </div>
 
-<!-- Generate / Calculate Character -->
-<div id="aboutInstruct">
-    <h2 class="sub2Head">Cyberpunk 2020 Character Generator</h2>
-    <br>
-    <br>
-    <span class="instructSmall">
-        Use the controls and fields below to create your character.
-        Any radio button can be clicked again (even if already selected) to
-        re-roll (random options) or reset selections (manual options).
-        <br>
-        <br>
-        Once you've finished choosing all your character details below,
-        you can:
-        <p>
-            Copy text version of your character to the clipboard:
-            <br>
-            <button id="copyButton">Copy Character as Text</button>
-        </p>
-        <p>
-            Save an image of your character:
-            <br>
-            <button id="saveImage">Save Character Sheet as Image</button>
-            <br>
-            <span class="instructVerySmall">(Opens in a new window / tab -- you may need to disable popup blocking)</span>
-        </p>
-
-    </span>
-    <p>
-    <div class="feedback">
-        <br>
-        <a href="about.html" id="about">Click here</a> to leave feedback, ask a question, or report a problem.
-    </div>
-    </p>
-    <p>
-    <div class="feedback">
-        <br>
-        <a href="https://github.com/ericdorsey/cp2020">View Source</a> on GitHub.
-    </div>
-    </p>
-</div>
-
-
-
-<div id="calcChar">
-    <div id="randomOrManual">
-        <h3 class="sub3Head">Randomize Everything?</h3>
-        <br>
-        <span class="instructSmall">
-            Clicking yes below will randomly select everything:
-            Roll Method, Stats, Role, Skills, Style, Background, etc.
-        </span>
-        <br>
-        <label for="randRole" id="randomizeEverything_label">
-            <input type="radio" name="randOrManualRadios" id="randomizeEverything"> Yes, randomize everything.
-        </label>
-    </div>
-
-    <br>
-    <h3 class="sub3Head">Handle</h3>
-    <br>
-    <label for="handle" id="handle_label">
-        Handle (name): <input type="text" id="handle" size="45">
-    </label>
-    <br>
-    <br>
-    <h3 class="sub3Head">Statistics</h3>
-    <br>
-    <span class="instructSmall">
-        Each character has nine Statistics -- values representing
-        the level of native ability of the character in specific areas of activity.
-    </span>
-    <p></p>
-    <h4 class="sub4Head">Character Points; Choose Roll Method:</h4>
-    <br>
-    <span class="instructSmall">(Click a roll method; click again to re-roll)</span>
-    <table id="statRollTable">
-        <tr>
-            <td>
-                <select size="8" id="rollMethod">
-                    <option value="random">Random Method</option>
-                    <option value="fast">Fast Method</option>
-                    <option value="cineMajorHero">Major Hero</option>
-                    <option value="cineMajorSupp">Major Supporting Character</option>
-                    <option value="cineMinorHero">Minor Hero</option>
-                    <option value="cineMinorSupp">Minor Supporting Character</option>
-                    <option value="Average">Average</option>
-                    <option value="manual">Manually Enter Value</option>
-                </select>
-            </td>
-            <td id="rollOutput">
-
-            </td>
-        </tr>
-    </table>
-    <p>
-        <span class="bold">User Assigned Stats</span>
-        <br>
-        You must choose a roll method above before you can edit these fields.
-        <br>
-        <br>
-        <span id="statPointsLine">Stats Points Remaining: <span id="statPointsRemaining"></span></span>
-        <table id="statsTable">
-            <tbody>
-                <tr>
-                    <th>Intelligence (INT)</th>
-                    <td><input type="text" id="int" class="statValueBoxes" size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Reflexes (REF)</th>
-                    <td><input type="text" id="ref"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Technical Ability (TECH)</th>
-                    <td><input type="text" id="tech"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Cool (COOL)</th>
-                    <td><input type="text" id="cl"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Attractiveness (ATT)</th>
-                    <td><input type="text" id="att"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Luck (LUCK)</th>
-                    <td><input type="text" id="lk"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Movement Allowance (MA)</th>
-                    <td><input type="text" id="ma"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Body Type (BODY)</th>
-                    <td><input type="text" id="bt"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-                <tr>
-                    <th>Empathy (EMP)</th>
-                    <td><input type="text" id="emp"  class="statValueBoxes"size="2" disabled="true"></td>
-                </tr>
-            </tbody>
-        </table>
-    </p>
-    <p>
-        <span class="bold">Derived Stats</span>
-        <br>
-        Below fields are automatically calculated.
-        <br>
-        <br>
-        <label for="run" id="run_label">
-            Run <input type="text" id="run" size="3" disabled="true"> <span class="instruction">in meters</span>
-        </label>
-        <br>
-        <label for="leap" id="leap_label">
-            Leap <input type="text" id="leap" size="3" disabled="true">
-        </label>
-        <br>
-        <label for="lift" id="lift_label">
-            Lift <input type="text" id="lift" size="3" disabled="true"> <span class="instruction">in kgs</span>
-        </label>
-        <label for="liftLBs" id="liftLBs_label">
-            <input type="text" id="liftLBs" size="6" disabled="true"> <span class="instruction">in lbs</span>
-        </label>
-        <br>
-        <label for="carry" id="carry_label">
-            Carry <input type="text" id="carry" size="3" disabled="true"> <span class="instruction">in kgs</span>
-        </label>
-        <label for="carryLBs" id="carryLBs_label">
-            <input type="text" id="carryLBs" size="6" disabled="true"> <span class="instruction">in lbs</span>
-        </label>
-        <br>
-        <label for="bodyType" id="bodyType_label">
-            Body Type <input type="text" id="bodyType" size="15" disabled="true">
-        </label>
-        <br>
-        <label for="btm" id="btm_label">
-            Body Type Modifier <input type="text" id="btm" size="3" disabled="true">
-        </label>
-        <br>
-        <label for="save" id="save_label">
-            Save <input type="text" id="save" size="3" disabled="true">
-        </label>
-        <br>
-        <label for="humanity" id="humanity_label">
-            Humanity <input type="text" id="humanity" size="3" disabled="true">
-        </label>
-    </p>
-
-    <div id="roleAndSkills">
-        <h3 class="sub3Head">Role and Skills</h3>
-        <br>
-        <h4 class="sub4Head">Role</h4>
-        <br>
-        <span class="instructSmall">
-            Click radio button again to re-roll / reselect
-        </span>
-        <br>
-        <label for="randRole" id="randRole_label">
-            <input type="radio" name="roleRadios" id="randRole"> Randomly Choose Role
-        </label>
-        <br>
-        <label for="manRole" id="manRole_label">
-            <input type="radio" name="roleRadios" id="manRole"> Manually Choose Role
-        </label>
-        <br>
-        <label for="roleField" id="roleField_label">
-            Role: <input type="text" id="roleField" disabled="true">
-        </label>
-    <br>
-        <label for="roleSelect" id="roleSelect_label">
-            Select Role
-            <select id="roleSelect"></select>
-        </label>
-        <div id="roleSpace"></div>
-        <br>
-        <h4 class="sub4Head">Skills</h4>
-        <br>
-        <span id="careerSkills" class="bold">Career Skills</span>
-        <br>
-        <span id="careerSkillPointsLine">Career Skill Points Remaining: <span id="careerSkillPointsRemaining">40</span></span>
-        <table id="careerSkillTable">
-
-        </table>
-        <br>
-        <span id="pickupSkills" class="bold">Pickup Skills</span>
-        <br>
-        <label for="pickupSkillPointField" id="pickupSkillPointField_label">
-            Pickup Skill Points (REF + INT) : <input type="text" id="pickupSkillPointField" size= "3" disabled="true">
-        </label>
-        <br>
-        <span id="pickupSkillPointsLine">Pickup Skill Points Remaining: <span id="pickupSkillPointsRemaining"></span></span>
-
-        <table id="pickupSkillsTable">
-
-        </table>
-
-    </div>
-    <br>
-    <h3 class="sub3Head">Origins and Personal Style</h3>
-    <br>
-    <h4 class="sub4Head">Dress & Personal Style</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <form>
-        <input type="radio" name="persStyle" id="rollStyle"> Randomly Choose Style
-        <br> <input type="radio" name="persStyle" id="manualStyle"> Manually Choose Style
-
-        <select id="manualClothesSelect"></select>
-        <select id="manualHairSelect"></select>
-        <select id="manualAffecSelect"></select>
-
-        <br>Clothes <input type="text" id="clothesField" size="15" disabled="true">
-        <br>Hairstyle <input type="text" id="hairField" size="15" disabled="true">
-        <br>Affectations <input type="text" id="affecField" size="15" disabled="true">
-
-    </form>
-    <br>
-    <h4 class="sub4Head">Ethnic Origins</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <form>
-        <input type="radio" name="ethnic" id="rollEth"> Randomly Choose Origin
-        <br>
-        <input type="radio" name="ethnic" id="manualEth"> Manually Choose Origin
-        <br>
-        <select id="manualEthSelect"></select>
-        <select id="manualLangSelect"></select>
-
-        Ethnicity <input type="text" id="ethField" size="30" disabled="true">
-        <br>Language <input type="text" id="ethLang" size="20" disabled="true">
-    </form>
-
-    <br>
-    <h3 class="sub3Head">Family Background</h3>
-    <br>
-    <h4 class="sub4Head">Family Ranking</h4>
-    <br>
-
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <form>
-        <input type="radio" name="famRank" id="randFam"> Randomly Choose Family Ranking
-        <br>
-        <input type="radio" name="famRank" id="manualFam"> Manually Choose Family Ranking
-        <br>
-        <select id="manualFamSelect"></select>
-
-        Family Ranking <input type="text" id="famRankField" disabled="true" size="25">
-    </form>
-
-    <br>
-    <h4 class="sub4Head">Parents</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <form>
-        <label for="randParents">
-            <input type="radio" name="parentsAlive" id="randParents"> Randomly Choose Status of Parents
-        </label>
-        <br>
-
-        <label for="manualParents">
-            <input type="radio" name="parentsAlive" id="manualParents"> Manually Choose Status of Parents
-        </label>
-
-
-        <label for="parentsOkayRadio" id="parentsOkayRadio_label">
-            <input type="radio" name="manualParentStatus" id="parentsOkayRadio"> Parents okay
-        </label>
-
-        <label for="parentsIssuesRadio" id="parentsIssuesRadio_label">
-            <input type="radio" name="manualParentStatus" id="parentsIssuesRadio"> Something happend to parents
-        </label>
-
-        <select id="manualParentSelect"></select>
-        <br>
-        Status of Parents:
-        <br><input type="text" size="50" id="parentStatusField" disabled="true">
-
-        <p id="parentSomethingHappened">
-            What Happened to Your Parents?
-            <input type="text" size="60" id="parentSomethingHappenedField" disabled="true">
-        </p>
-    </form>
-    <br>
-    <h4 class="sub4Head">Family Status</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <form>
-        <label for="randFamilyStatus" id="randFamilyStatus_label">
-            <input type="radio" name="familyStatus" id="randFamilyStatus"> Randomly Choose Family Status
-        </label>
-        <br>
-
-        <label for="manualFamilyStatus" id="manualFamilyStatus_label">
-            <input type="radio"  name="familyStatus" id="manualFamilyStatus"> Manually Choose Family Status
-        </label>
-        <br>
-        <label for="manualFamDanger" id="manualFamDanger_label">
-           <input type="radio" name="manualFam" id="manualFamDanger"> Family status in danger
-        </label>
-        <label for="manualFamOkay" id="manualFamOkay_label">
-            <input type="radio" name="manualFam" id="manualFamOkay"> Family status is OK
-        </label>
-
-
-        <!--<h4 id="famTragedyHeader" class="sub4Head">Family Tragedy</h4>-->
-        <span id="famTragedyHeader">Family Tragedy</span>
-        <select id="familyTragedySelect"></select>
-          <label for="familyTragedyOutput" id="familyTragedyOutput_label">
-            <!--Family Tragedy Detail-->
-            <textarea id="familyTragedyOutput" rows="3" cols=35 disabled="true"></textarea>
-        </label>
-
-            <label for="familyStatus" id="familyStatus_label">
-                Family Status
-                <input type="text" size="65" id="familyStatus" disabled="true">
-            </label>
-    </form>
-
-
-    <br>
-    <h4 class="sub4Head">Childhood Environment</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <label for="randChildEnv" id="randChildEnv_label">
-        <input type="radio" name="childRadios" id="randChildEnv"> Randomly Choose Childhood Environment
-    </label>
-    <br>
-    <label for="manualChildEnv" id="manualChildEnv_label">
-        <input type="radio" name="childRadios" id="manualChildEnv"> Manually Choose Childhood Environment
-    </label>
-    <br>
-    <label for="manualChildSelect" id="manualChildSelect_label">
-        <select id="manualChildSelect"></select>
-    </label>
-    <label for="childEnvOutput" id="childEnvOutput_label">
-        <br>
-        Childhood Environment:
-        <br>
-        <input type="text" size= "58" id="childEnvOutput" disabled="true">
-    </label>
-    <br>
-    <br>
-    <h4 class="sub4Head">Siblings</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <div id="siblingsContainer">
-        <label for="randSiblings" id="randSiblings_label">
-            <input type="radio" name="siblingsRadios" id="randSiblings"> Randomly Choose Siblings
-        </label>
-        <br>
-        <label for="manualSiblings" id="manualSiblings_label">
-            <input type="radio" name="siblingsRadios" id="manualSiblings"> Manually Choose Siblings
-        </label>
-        <br>
-        <label for="manualSiblingSelect" id="manualSiblingSelect_label">
-            <select id="manualSiblingSelect"></select>
-        </label>
-        <label for="haveSiblings" id="haveSiblings_label">
-            Have Siblings? <input type="text" id="haveSiblings" disabled="true" size="30">
-        </label>
-    </div>
-    <!-- Houses the output of each sibling: gender, age, feelings about -->
-    <div id="siblingsOutput">
-
-    </div>
-    <br>
-    <h3 class="sub3Head">Motivations</h3>
-    <br>
-    <h4 class="sub4Head">Personality Traits</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <label for="randPersTraits" id="randPersTraits_label">
-        <input type="radio" name="persRadios" id="randPersTraits"> Randomly Choose Personality Traits
-    </label>
-    <br>
-    <label for="manualPersTraits" id="manualPersTraits_label">
-        <input type="radio" name="persRadios" id="manualPersTraits"> Manually Choose Personality Traits
-    </label>
-    <br>
-    <label for="persTraitsField" id="persTraitsField_label">
-        Personality Traits: <input type="text" id="persTraitsField" disabled="true" size="30">
-    </label>
-    <select id="persTraitsSelect"></select>
-    <br>
-    <br>
-    <h4 class="sub4Head">Person You Value Most</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <label for="randPersValue" id="randPersValue_label">
-        <input type="radio" name="valRadios" id="randPersValue"> Randomly Choose Person Valued
-    </label>
-    <br>
-    <label for="manualPersValue" id="manualPersValue_label">
-        <input type="radio" name="valRadios" id="manualPersValue"> Manually Choose PersonValued
-    </label>
-    <br>
-    <label for="persValField" id="persValField_label">
-        Person You Value: <input type="text" id="persValField" disabled="true">
-    </label>
-    <br>
-    <select id="persValSelect"></select>
-
-    <br>
-    <h4 class="sub4Head">What Do You Value Most?</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <label for="randYouValue" id="randYouValue_label">
-        <input type="radio" name="youRadios" id="randYouValue"> Randomly Choose What You Value
-    </label>
-    <br>
-    <label for="manYouValue" id="manYouValue_label">
-        <input type="radio" name="youRadios" id="manYouValue"> Manually Choose What You Value
-    </label>
-    <br>
-    <label for="youValField" id="youValField_label">
-        What You Value: <input type="text" id="youValField" disabled="true">
-    </label>
-    <br>
-    <select id="youValSelect"></select>
-
-    <br>
-    <h4 class="sub4Head">How Do You Feel About Most People?</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <label for="randYouFeel" id="randYouFeel_label">
-        <input type="radio" name="feelRadios" id="randYouFeel"> Randomly Choose How You Feel About People
-    </label>
-    <br>
-    <label for="manYouFeel" id="manYouFeel_label">
-        <input type="radio" name="feelRadios" id="manYouFeel"> Manually Choose What How You Feel About People
-    </label>
-    <br>
-    <label for="youFeelField" id="youFeelField_label">
-        How You Feel:
-        <br>
-        <input type="text" id="youFeelField" disabled="true" size="65">
-    </label>
-    <br>
-    <select id="youFeelSelect"></select>
-    <br>
-    <h4 class="sub4Head">What Is Your Most Valued Possession?</h4>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect
-    </span>
-    <br>
-    <label for="randPos" id="randPos_label">
-        <input type="radio" name="posRadios" id="randPos"> Randomly Choose Most Valued Possession
-    </label>
-    <br>
-    <label for="manPos" id="manPos_label">
-        <input type="radio" name="posRadios" id="manPos"> Manually Choose Most Valued Possession
-    </label>
-    <br>
-    <label for="posField" id="posField_label">
-        Most Valued Posession: <input type="text" id="posField" disabled="true">
-    </label>
-    <br>
-    <select id="posSelect"></select>
-
-    <br>
-    <h3 class="sub3Head">Life Events</h3>
-    <br>
-    <h4 class="sub4Head">Age</h4>
-    <br>
-    <br>
-    <input type="checkbox" id="preventNothing"> Check to prevent "Nothing Happened This Year" events.
-    <br>
-    <br>
-    <span class="instructSmall">
-        Click radio button again to re-roll / reselect. When manually entering age, it must be a value
-        between 17 and 99.
-    </span>
-    <br>
-    <label for="randAge" id="randAge_label">
-        <input type="radio" name="ageRadios" id="randAge"> Randomly Choose Your Age
-    </label>
-    <br>
-    <label for="manAge" id="manAge_label">
-        <input type="radio" name="ageRadios" id="manAge"> Manually Choose Your Age
-    </label>
-    <br>
-    <div>
-        <label for="ageField" id="ageField_label">
-            Age: <input type="text" id="ageField" disabled="true">
-        </label>
-        <table id="lifeTable">
-            <tr class="boldTableHead">
-                <td>Age</td>
-                <td>Event Type</td>
-                <td>Result</td>
-                <td>Detail</td>
-            </tr>
-        </table>
-    </div>
-
-
-</div>
 </body>
 
 </html>
